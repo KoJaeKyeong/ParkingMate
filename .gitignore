@@ -63,3 +63,4 @@ fastlane/test_output
 
 plan.pdf
 parking_app_ui.tsx
+.DS_Store
