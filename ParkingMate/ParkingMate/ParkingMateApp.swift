@@ -7,11 +7,18 @@
 
 import SwiftUI
 
+import ComposableArchitecture
+
 @main
 struct ParkingMateApp: App {
+    static let store = Store(initialState: HomeFeature.State()) {
+        HomeFeature()
+            ._printChanges()
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView(store: Self.store)
         }
     }
 }
