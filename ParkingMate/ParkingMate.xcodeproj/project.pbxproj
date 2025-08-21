@@ -14,9 +14,22 @@
 		2A0AC16C2E34E026004EED8D /* ParkingMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParkingMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		2AAD3DFC2E54B7390092E60E /* Exceptions for "ParkingMate" folder in "ParkingMate" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 2A0AC16B2E34E026004EED8D /* ParkingMate */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2A0AC16E2E34E026004EED8D /* ParkingMate */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2AAD3DFC2E54B7390092E60E /* Exceptions for "ParkingMate" folder in "ParkingMate" target */,
+			);
 			path = ParkingMate;
 			sourceTree = "<group>";
 		};
@@ -265,6 +278,11 @@
 				DEVELOPMENT_TEAM = LPHNDVUAA8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "주차 위치를 사진으로 기록하기 위해 카메라 권한이 필요합니다.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "주차 위치를 음성으로 입력하기 위해 마이크 권한이 필요합니다.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성을 텍스트로 변환하여 주차 위치를 기록하기 위해 음성 인식 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -293,6 +311,11 @@
 				DEVELOPMENT_TEAM = LPHNDVUAA8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "주차 위치를 사진으로 기록하기 위해 카메라 권한이 필요합니다.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "주차 위치를 음성으로 입력하기 위해 마이크 권한이 필요합니다.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성을 텍스트로 변환하여 주차 위치를 기록하기 위해 음성 인식 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
