@@ -18,20 +18,27 @@ struct HomeFeature {
     
     @ObservableState
     struct State: Equatable {
-        var parkingState: ParkingState = .idle
-        var parkingInfo = ParkingInfo()
-        var showInputSheet = false
-        var showMapView = false
+        @Presents var destination: Destination.State?
+        @Shared(.fileStorage(.parkingInfo)) var parkingInfo: ParkingInfo?
+        
+        var parkingState: ParkingState {
+            get {
+                parkingInfo != nil ? .parking : .idle
+            }
+        }
         var elapsedTime = ""
     }
     
     enum Action {
+        case onAppear
         case startParkingButtonTapped
         case finishParkingButtonTapped
         case editInfoButtonTapped
         case showMapButtonTapped
         case timerTick
         case updateElapsedTime
+        
+        case destination(PresentationAction<Destination.Action>)
     }
     
     @Dependency(\.continuousClock) var clock
@@ -43,11 +50,24 @@ struct HomeFeature {
     var body: some ReducerOf<Self> {        
         Reduce { state, action in
             switch action {
+            case .onAppear:
+                if state.parkingInfo != nil {
+                    return .run { send in
+                        for await _ in self.clock.timer(interval: .seconds(1)) {
+                            await send(.timerTick)
+                        }
+                    }
+                    .cancellable(id: CancelID.timer)
+                }
+                return .none
+                
             case .startParkingButtonTapped:
-                state.parkingState = .parking
-                state.parkingInfo.startTime = Date()
-                state.parkingInfo.gpsCoords = GPSCoordinate(latitude: 37.5665, longitude: 126.9780)
-                state.showInputSheet = true
+                state.$parkingInfo.withLock { parkingInfo in
+                    parkingInfo = ParkingInfo()
+                }
+                state.destination = .form(
+                    FormFeature.State()
+                )
                 
                 return .run { send in
                     for await _ in self.clock.timer(interval: .seconds(1)) {
@@ -57,31 +77,48 @@ struct HomeFeature {
                 .cancellable(id: CancelID.timer)
                 
             case .finishParkingButtonTapped:
-                state.parkingState = .idle
-                state.parkingInfo = ParkingInfo()
                 state.elapsedTime = ""
+                state.$parkingInfo.withLock { parkingInfo in
+                    parkingInfo = nil
+                }
                 
                 return .cancel(id: CancelID.timer)
                 
             case .editInfoButtonTapped:
-                state.showInputSheet = true
+                state.destination = .form(
+                    FormFeature.State()
+                )
                 return .none
                 
             case .showMapButtonTapped:
-                state.showMapView = true
                 return .none
                 
             case .timerTick:
                 return .send(.updateElapsedTime)
                 
             case .updateElapsedTime:
-                guard let startTime = state.parkingInfo.startTime else { return .none }
+                guard let startTime = state.parkingInfo?.startTime else { return .none }
                 let elapsed = Date().timeIntervalSince(startTime)
                 let hours = Int(elapsed) / 3600
                 let minutes = (Int(elapsed) % 3600) / 60
                 state.elapsedTime = "\(hours)시간 \(minutes)분"
                 return .none
+                
+            case .destination:
+                return .none
             }
+        }
+        .ifLet(\.$destination, action: \.destination) {
+            Destination.body
         }
     }
 }
+
+extension HomeFeature {
+    @Reducer
+    enum Destination {
+        case form(FormFeature)
+    }
+}
+
+extension HomeFeature.Destination.State: Equatable { }
