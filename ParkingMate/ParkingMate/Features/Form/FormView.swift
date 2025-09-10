@@ -142,6 +142,7 @@ struct FormView: View {
                                     )
                                     .offset(x: 8, y: -8)
                                 }
+                                .padding(.top, 8)
                             }
                         }
                     }
