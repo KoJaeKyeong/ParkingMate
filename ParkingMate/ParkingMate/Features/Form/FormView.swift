@@ -135,7 +135,9 @@ struct FormView: View {
                                         .scaledToFill()
                                         .frame(width: 100, height: 100)
                                         .clipShape(RoundedRectangle(cornerRadius: 12))
-                                    
+                                        .padding(.top, 10)
+                                        .padding(.trailing, 10)
+
                                     Button(
                                         action: {
                                             store.send(.removeImage(at: index))
@@ -146,9 +148,7 @@ struct FormView: View {
                                                 .background(Circle().fill(Color.red))
                                         }
                                     )
-                                    .offset(x: 8, y: -8)
                                 }
-                                .padding(.top, 8)
                             }
                         }
                     }
