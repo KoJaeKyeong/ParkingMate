@@ -1,5 +1,4 @@
 import Foundation
-import UIKit
 
 struct ParkingInfo: Equatable, Codable {
     var startTime: Date = .init()
@@ -16,8 +15,4 @@ struct GPSCoordinate: Equatable, Codable {
 struct PhotoItem: Identifiable, Equatable, Codable {
     let id: UUID
     let imageData: Data
-    
-    static func == (lhs: PhotoItem, rhs: PhotoItem) -> Bool {
-        lhs.id == rhs.id
-    }
 }
