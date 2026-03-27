@@ -40,6 +40,14 @@ struct HomeView: View {
         ) { form in
             FormView(store: form)
         }
+        .sheet(
+            item: $store.scope(
+                state: \.destination?.map,
+                action: \.destination.map
+            )
+        ) { map in
+            MapView(store: map)
+        }
     }
     
     private var headerSection: some View {
@@ -195,16 +203,16 @@ struct HomeView: View {
     private var parkingInfoDetails: some View {
         VStack(spacing: 16) {
             elapsedTimeRow
-            
+
             if let parkingInfo = store.parkingInfo {
                 if !parkingInfo.location.isEmpty {
                     locationInfoRow
                 }
-                
+
                 if !parkingInfo.photos.isEmpty {
                     photosRow(parkingInfo: parkingInfo)
                 }
-                
+
                 if parkingInfo.location.isEmpty && parkingInfo.photos.isEmpty {
                     emptyInfoPrompt
                 }

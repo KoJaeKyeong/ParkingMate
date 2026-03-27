@@ -37,11 +37,14 @@ struct HomeFeature {
         case showMapButtonTapped
         case timerTick
         case updateElapsedTime
-        
+        case locationReceived(GPSCoordinate)
+        case locationFailed
+
         case destination(PresentationAction<Destination.Action>)
     }
-    
+
     @Dependency(\.continuousClock) var clock
+    @Dependency(\.locationClient) var locationClient
     
     private enum CancelID {
         case timer
@@ -51,15 +54,20 @@ struct HomeFeature {
         Reduce { state, action in
             switch action {
             case .onAppear:
-                if state.parkingInfo != nil {
-                    return .run { send in
-                        for await _ in self.clock.timer(interval: .seconds(1)) {
-                            await send(.timerTick)
+                let isParking = state.parkingInfo != nil
+                return .merge(
+                    .run { _ in
+                        await self.locationClient.requestAuthorization()
+                    },
+                    isParking
+                        ? .run { send in
+                            for await _ in self.clock.timer(interval: .seconds(1)) {
+                                await send(.timerTick)
+                            }
                         }
-                    }
-                    .cancellable(id: CancelID.timer)
-                }
-                return .none
+                        .cancellable(id: CancelID.timer)
+                        : .none
+                )
                 
             case .startParkingButtonTapped:
                 state.$parkingInfo.withLock { parkingInfo in
@@ -68,13 +76,23 @@ struct HomeFeature {
                 state.destination = .form(
                     FormFeature.State()
                 )
-                
-                return .run { send in
-                    for await _ in self.clock.timer(interval: .seconds(1)) {
-                        await send(.timerTick)
+
+                return .merge(
+                    .run { send in
+                        for await _ in self.clock.timer(interval: .seconds(1)) {
+                            await send(.timerTick)
+                        }
                     }
-                }
-                .cancellable(id: CancelID.timer)
+                    .cancellable(id: CancelID.timer),
+                    .run { send in
+                        do {
+                            let coordinate = try await self.locationClient.requestLocation()
+                            await send(.locationReceived(coordinate))
+                        } catch {
+                            await send(.locationFailed)
+                        }
+                    }
+                )
                 
             case .finishParkingButtonTapped:
                 state.elapsedTime = ""
@@ -91,6 +109,9 @@ struct HomeFeature {
                 return .none
                 
             case .showMapButtonTapped:
+                state.destination = .map(
+                    MapFeature.State()
+                )
                 return .none
                 
             case .timerTick:
@@ -104,6 +125,15 @@ struct HomeFeature {
                 state.elapsedTime = "\(hours)시간 \(minutes)분"
                 return .none
                 
+            case let .locationReceived(coordinate):
+                state.$parkingInfo.withLock { parkingInfo in
+                    parkingInfo?.gpsCoords = coordinate
+                }
+                return .none
+
+            case .locationFailed:
+                return .none
+
             case .destination:
                 return .none
             }
@@ -118,6 +148,7 @@ extension HomeFeature {
     @Reducer
     enum Destination {
         case form(FormFeature)
+        case map(MapFeature)
     }
 }
 

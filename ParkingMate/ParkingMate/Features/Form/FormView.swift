@@ -27,7 +27,7 @@ struct FormView: View {
             .navigationTitle("주차 정보 입력")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button("취소") {
                         store.send(.cancelButtonTapped)
                     }
@@ -97,6 +97,12 @@ struct FormView: View {
                             .font(.caption2)
                             .foregroundColor(.secondary)
                     }
+                }
+
+                if let errorMessage = store.speechErrorMessage {
+                    Text(errorMessage)
+                        .font(.caption)
+                        .foregroundColor(.red)
                 }
             }
         }

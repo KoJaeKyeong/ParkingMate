@@ -5,7 +5,7 @@
 //  Created by 고재경 on 8/14/25.
 //
 
-import _PhotosUI_SwiftUI
+import UIKit 
 import Speech
 
 import ComposableArchitecture
@@ -15,18 +15,16 @@ struct FormFeature {
     @ObservableState
     struct State: Equatable {
         @Shared(.fileStorage(.parkingInfo)) var parkingInfo: ParkingInfo?
-        
-        var locationInput: String
-        var photoImages: [UIImage]
+
+        var locationInput: String = ""
+        var photoImages: [UIImage] = []
         var isRecording: Bool = false
         var speechAuthorizationStatus: SFSpeechRecognizerAuthorizationStatus = .notDetermined
         var showCamera: Bool = false
         var capturedImage: UIImage?
-        
+        var speechErrorMessage: String?
+
         init() {
-            @Shared(.fileStorage(.parkingInfo)) var parkingInfo: ParkingInfo?
-            self._parkingInfo = _parkingInfo
-            
             // 기존 정보가 있으면 로드
             self.locationInput = parkingInfo?.location ?? ""
             self.photoImages = parkingInfo?.photos.compactMap { photoItem in
@@ -105,7 +103,8 @@ struct FormFeature {
                 
             case .voiceInputButtonTapped:
                 guard !state.isRecording else { return .none }
-                
+                state.speechErrorMessage = nil
+
                 return .run { send in
                     let status = await speechRecognition.requestAuthorization()
                     await send(.speechAuthorizationResponse(status))
@@ -135,8 +134,13 @@ struct FormFeature {
                 state.locationInput = text
                 return .none
                 
-            case .speechRecognitionCompleted, .speechRecognitionFailed:
+            case .speechRecognitionCompleted:
                 state.isRecording = false
+                return .none
+
+            case .speechRecognitionFailed:
+                state.isRecording = false
+                state.speechErrorMessage = "음성 인식에 실패했습니다. 다시 시도해주세요."
                 return .none
             }
         }
