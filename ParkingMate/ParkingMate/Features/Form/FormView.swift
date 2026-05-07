@@ -4,17 +4,17 @@ import ComposableArchitecture
 
 struct FormView: View {
     @Bindable var store: StoreOf<FormFeature>
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
                 LinearGradient(
-                    colors: [Color.blue.opacity(0.1), Color.indigo.opacity(0.2)],
+                    colors: [.backgroundStart, .backgroundEnd],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
                 .ignoresSafeArea()
-                
+
                 ScrollView {
                     VStack(spacing: 20) {
                         locationSection
@@ -31,6 +31,7 @@ struct FormView: View {
                     Button("취소") {
                         store.send(.cancelButtonTapped)
                     }
+                    .foregroundColor(.brandPrimary)
                 }
             }
         }
@@ -42,25 +43,27 @@ struct FormView: View {
                 }
         }
     }
-    
+
     private var locationSection: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 12) {
                 Image(systemName: "pencil.circle.fill")
-                    .foregroundColor(.blue)
+                    .foregroundColor(.brandPrimary)
                 Text("위치 메모")
                     .font(.headline)
+                    .foregroundColor(.textPrimary)
                 Text("(선택사항)")
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.textSecondary)
             }
-            
+
             VStack(spacing: 12) {
                 TextField("예: 지하 3층 B4, 2층 A구역 12번", text: $store.locationInput.sending(\.setLocation))
                     .padding()
-                    .background(Color.gray.opacity(0.1))
+                    .foregroundColor(.textPrimary)
+                    .background(Color.nestedBackground)
                     .cornerRadius(12)
-                
+
                 HStack {
                     Button(
                         action: {
@@ -73,7 +76,7 @@ struct FormView: View {
                                 if store.isRecording {
                                     ProgressView()
                                         .scaleEffect(0.8)
-                                        .progressViewStyle(CircularProgressViewStyle(tint: .red))
+                                        .progressViewStyle(CircularProgressViewStyle(tint: .brandDanger))
                                 } else {
                                     Image(systemName: "mic.fill")
                                         .font(.caption)
@@ -83,47 +86,46 @@ struct FormView: View {
                             }
                             .padding(.horizontal, 16)
                             .padding(.vertical, 8)
-                            .background(store.isRecording ? Color.red.opacity(0.1) : Color.blue.opacity(0.1))
-                            .foregroundColor(store.isRecording ? .red : .blue)
+                            .background(store.isRecording ? Color.brandDanger.opacity(0.12) : Color.brandPrimary.opacity(0.12))
+                            .foregroundColor(store.isRecording ? .brandDanger : .brandPrimary)
                             .cornerRadius(8)
                         }
                     )
                     .disabled(store.isRecording)
-                    
+
                     Spacer()
-                    
+
                     if store.isRecording {
                         Text("말씀이 끝나면 자동으로 인식됩니다")
                             .font(.caption2)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.textSecondary)
                     }
                 }
 
                 if let errorMessage = store.speechErrorMessage {
                     Text(errorMessage)
                         .font(.caption)
-                        .foregroundColor(.red)
+                        .foregroundColor(.brandDanger)
                 }
             }
         }
         .padding(20)
-        .background(Color.white)
-        .cornerRadius(20)
-        .shadow(color: .black.opacity(0.1), radius: 10, y: 5)
+        .cardStyle()
     }
-    
+
     private var photoSection: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 12) {
                 Image(systemName: "camera.fill")
-                    .foregroundColor(.blue)
+                    .foregroundColor(.brandPrimary)
                 Text("사진 촬영")
                     .font(.headline)
+                    .foregroundColor(.textPrimary)
                 Text("(선택사항)")
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.textSecondary)
             }
-            
+
             VStack(spacing: 12) {
                 if !store.photoImages.isEmpty {
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -145,7 +147,7 @@ struct FormView: View {
                                             Image(systemName: "xmark.circle.fill")
                                                 .font(.title3)
                                                 .foregroundColor(.white)
-                                                .background(Circle().fill(Color.red))
+                                                .background(Circle().fill(Color.brandDanger))
                                         }
                                     )
                                 }
@@ -153,7 +155,7 @@ struct FormView: View {
                         }
                     }
                 }
-                
+
                 if store.photoImages.count < 3 {
                     Button(action: {
                         store.send(.takePictureButtonTapped)
@@ -161,33 +163,31 @@ struct FormView: View {
                         HStack(spacing: 12) {
                             Image(systemName: "camera.fill")
                                 .font(.title2)
-                                .foregroundColor(.blue)
+                                .foregroundColor(.brandPrimary)
                             Text("사진 촬영 (\(store.photoImages.count)/3)")
-                                .foregroundColor(.blue)
+                                .foregroundColor(.brandPrimary)
                         }
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 20)
                         .background(
                             RoundedRectangle(cornerRadius: 12)
                                 .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
-                                .foregroundColor(.blue.opacity(0.5))
+                                .foregroundColor(.brandPrimary.opacity(0.5))
                         )
-                        .background(Color.blue.opacity(0.05))
+                        .background(Color.brandPrimary.opacity(0.06))
                         .cornerRadius(12)
                     }
                 }
-                
+
                 Text("주차 위치나 주변 특징을 촬영하면 나중에 찾기 쉬워집니다.")
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.textSecondary)
             }
         }
         .padding(20)
-        .background(Color.white)
-        .cornerRadius(20)
-        .shadow(color: .black.opacity(0.1), radius: 10, y: 5)
+        .cardStyle()
     }
-    
+
     private var saveButton: some View {
         Button(action: {
             store.send(.saveButtonTapped)
@@ -199,7 +199,7 @@ struct FormView: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 16)
-            .background(Color.blue)
+            .background(Color.brandPrimary)
             .foregroundColor(.white)
             .cornerRadius(12)
         }
@@ -221,7 +221,7 @@ struct FormView: View {
         photos: [],
         gpsCoords: nil
     )
-    
+
     return FormView(
         store: Store(initialState: FormFeature.State()) {
             FormFeature()

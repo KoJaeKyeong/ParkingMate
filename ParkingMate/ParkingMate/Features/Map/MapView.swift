@@ -26,13 +26,16 @@ struct MapView: View {
                     Button(action: { store.send(.closeButtonTapped) }) {
                         ZStack {
                             Circle()
-                                .fill(Color.white)
+                                .fill(Color.cardBackground)
                                 .frame(width: 44, height: 44)
+                                .overlay(
+                                    Circle().stroke(Color.divider, lineWidth: 0.5)
+                                )
                                 .shadow(color: .black.opacity(0.2), radius: 8, y: 2)
 
                             Image(systemName: "xmark")
                                 .font(.system(size: 18, weight: .semibold))
-                                .foregroundColor(.gray)
+                                .foregroundColor(.textPrimary)
                         }
                     }
                     .padding(.top, 60)
@@ -65,7 +68,7 @@ struct MapView: View {
                         } label: {
                             Image(systemName: isFollowingHeading ? "location.north.fill" : "location.north.line")
                                 .font(.system(size: 18))
-                                .foregroundColor(isFollowingHeading ? .blue : .primary)
+                                .foregroundColor(isFollowingHeading ? .brandPrimary : .textPrimary)
                                 .frame(width: 44, height: 44)
                                 .background(.regularMaterial)
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
@@ -112,21 +115,25 @@ struct MapView: View {
             } else {
                 // GPS 좌표가 없을 때
                 ZStack {
-                    Color(UIColor.systemGroupedBackground)
-                        .ignoresSafeArea()
+                    LinearGradient(
+                        colors: [.backgroundStart, .backgroundEnd],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                    .ignoresSafeArea()
 
                     VStack(spacing: 20) {
                         Image(systemName: "mappin.slash")
                             .font(.system(size: 64))
-                            .foregroundColor(.gray.opacity(0.5))
+                            .foregroundColor(.textSecondary.opacity(0.6))
 
                         Text("GPS 위치 정보가 없습니다")
                             .font(.headline)
-                            .foregroundColor(.gray)
+                            .foregroundColor(.textPrimary)
 
                         Text("주차 시작 시 위치를 저장해주세요")
                             .font(.subheadline)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.textSecondary)
                     }
                 }
             }
