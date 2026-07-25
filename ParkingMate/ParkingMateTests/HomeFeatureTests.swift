@@ -13,24 +13,22 @@ import ComposableArchitecture
 
 @MainActor
 struct HomeFeatureTests {
-    @Test func test_정보수정_시트_열기() async {
+    @Test func test_정보수정_탭시_수정요청_방출() async {
         let store = TestStore(initialState: HomeFeature.State()) {
             HomeFeature()
         }
 
-        await store.send(.editInfoButtonTapped) {
-            $0.destination = .form(FormFeature.State())
-        }
+        await store.send(.editInfoButtonTapped)
+        await store.receive(\.delegate.editInfoRequested)
     }
 
-    @Test func test_위치확인_지도시트_열기() async {
+    @Test func test_위치확인_탭시_지도요청_방출() async {
         let store = TestStore(initialState: HomeFeature.State()) {
             HomeFeature()
         }
 
-        await store.send(.showMapButtonTapped) {
-            $0.destination = .map(MapFeature.State())
-        }
+        await store.send(.showMapButtonTapped)
+        await store.receive(\.delegate.mapRequested)
     }
 
     @Test func test_타이머틱_경과시간_갱신요청() async {
@@ -63,13 +61,9 @@ struct HomeFeatureTests {
         store.exhaustivity = .off
 
         await store.send(.startParkingButtonTapped)
+        await store.receive(\.delegate.parkingStarted)
 
         #expect(store.state.parkingInfo != nil)
-        if case .form = store.state.destination {
-            // form destination 으로 전환 OK
-        } else {
-            Issue.record("destination 이 .form 이어야 함")
-        }
 
         await store.send(.finishParkingButtonTapped)
         #expect(store.state.parkingInfo == nil)

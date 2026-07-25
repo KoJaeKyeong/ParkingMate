@@ -7,12 +7,22 @@
 
 import SwiftUI
 
-struct AppView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+import ComposableArchitecture
 
-#Preview {
-    AppView()
+struct AppView: View {
+    @Bindable var store: StoreOf<AppFeature>
+    
+    var body: some View {
+        HomeView(store: store.scope(state: \.home, action: \.home))
+            .sheet(
+                item: $store.scope(state: \.destination?.form, action: \.destination.form)
+            ) { store in
+                FormView(store: store)
+            }
+            .sheet(
+                item: $store.scope(state: \.destination?.map, action: \.destination.map)
+            ) { store in
+                MapView(store: store)
+            }
+    }
 }
