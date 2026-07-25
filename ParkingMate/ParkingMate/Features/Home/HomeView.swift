@@ -32,22 +32,6 @@ struct HomeView: View {
         .onAppear {
             store.send(.onAppear)
         }
-        .sheet(
-            item: $store.scope(
-                state: \.destination?.form,
-                action: \.destination.form
-            )
-        ) { form in
-            FormView(store: form)
-        }
-        .sheet(
-            item: $store.scope(
-                state: \.destination?.map,
-                action: \.destination.map
-            )
-        ) { map in
-            MapView(store: map)
-        }
     }
 
     private var headerSection: some View {

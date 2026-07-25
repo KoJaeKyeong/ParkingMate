@@ -18,7 +18,6 @@ struct HomeFeature {
     
     @ObservableState
     struct State: Equatable {
-        @Presents var destination: Destination.State?
         @Shared(.fileStorage(.parkingInfo)) var parkingInfo: ParkingInfo?
         
         var parkingState: ParkingState {
@@ -39,8 +38,14 @@ struct HomeFeature {
         case updateElapsedTime
         case locationReceived(GPSCoordinate)
         case locationFailed
-
-        case destination(PresentationAction<Destination.Action>)
+        case delegate(Delegate)
+        
+        @CasePathable
+        enum Delegate: Equatable {
+            case parkingStarted
+            case editInfoRequested
+            case mapRequested
+        }
     }
 
     @Dependency(\.continuousClock) var clock
@@ -73,11 +78,9 @@ struct HomeFeature {
                 state.$parkingInfo.withLock { parkingInfo in
                     parkingInfo = ParkingInfo()
                 }
-                state.destination = .form(
-                    FormFeature.State()
-                )
 
                 return .merge(
+                    .send(.delegate(.parkingStarted)),
                     .run { send in
                         for await _ in self.clock.timer(interval: .seconds(1)) {
                             await send(.timerTick)
@@ -103,16 +106,10 @@ struct HomeFeature {
                 return .cancel(id: CancelID.timer)
                 
             case .editInfoButtonTapped:
-                state.destination = .form(
-                    FormFeature.State()
-                )
-                return .none
+                return .send(.delegate(.editInfoRequested))
                 
             case .showMapButtonTapped:
-                state.destination = .map(
-                    MapFeature.State()
-                )
-                return .none
+                return .send(.delegate(.mapRequested))
                 
             case .timerTick:
                 return .send(.updateElapsedTime)
@@ -134,22 +131,9 @@ struct HomeFeature {
             case .locationFailed:
                 return .none
 
-            case .destination:
+            case .delegate:
                 return .none
             }
         }
-        .ifLet(\.$destination, action: \.destination) {
-            Destination.body
-        }
     }
 }
-
-extension HomeFeature {
-    @Reducer
-    enum Destination {
-        case form(FormFeature)
-        case map(MapFeature)
-    }
-}
-
-extension HomeFeature.Destination.State: Equatable { }

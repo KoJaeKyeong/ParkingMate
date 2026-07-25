@@ -11,14 +11,14 @@ import ComposableArchitecture
 
 @main
 struct ParkingMateApp: App {
-    static let store = Store(initialState: HomeFeature.State()) {
-        HomeFeature()
+    static let store = Store(initialState: AppFeature.State()) {
+        AppFeature()
             ._printChanges()
     }
     
     var body: some Scene {
         WindowGroup {
-            HomeView(store: Self.store)
+            AppView(store: Self.store)
         }
     }
 }
