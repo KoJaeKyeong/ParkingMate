@@ -370,15 +370,15 @@ struct HomeView: View {
     private func formatTime(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
-        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.locale = .current
         return formatter.string(from: date)
     }
 }
 
 struct FeatureRow: View {
     let icon: String
-    let title: String
-    let subtitle: String
+    let title: LocalizedStringKey
+    let subtitle: LocalizedStringKey
 
     var body: some View {
         HStack(spacing: 16) {

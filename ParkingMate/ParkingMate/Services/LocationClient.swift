@@ -115,7 +115,7 @@ enum LocationError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .notAuthorized:
-            return "위치 권한이 없습니다. 설정에서 권한을 허용해주세요."
+            return String(localized: "위치 권한이 없습니다. 설정에서 권한을 허용해주세요.")
         }
     }
 }

@@ -122,7 +122,7 @@ struct HomeFeature {
                 let elapsed = Date().timeIntervalSince(startTime)
                 let hours = Int(elapsed) / 3600
                 let minutes = (Int(elapsed) % 3600) / 60
-                state.elapsedTime = "\(hours)시간 \(minutes)분"
+                state.elapsedTime = String(localized: "\(hours)시간 \(minutes)분")
                 return .none
                 
             case let .locationReceived(coordinate):

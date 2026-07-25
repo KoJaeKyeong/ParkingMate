@@ -103,7 +103,7 @@ struct FormView: View {
                 }
 
                 if let errorMessage = store.speechErrorMessage {
-                    Text(errorMessage)
+                    Text(LocalizedStringKey(errorMessage))
                         .font(.caption)
                         .foregroundColor(.brandDanger)
                 }

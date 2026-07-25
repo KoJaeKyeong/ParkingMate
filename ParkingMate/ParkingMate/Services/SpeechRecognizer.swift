@@ -16,7 +16,8 @@ actor SpeechRecognitionManager {
         try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
         try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
         
-        let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "ko-KR"))
+        // 기기 언어에 맞춰 인식 (미지원 로케일이면 nil → recognizerNotAvailable 처리)
+        let recognizer = SFSpeechRecognizer(locale: .current)
         
         guard let recognizer = recognizer else {
             throw SpeechRecognitionError.recognizerNotAvailable
@@ -230,11 +231,11 @@ enum SpeechRecognitionError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .recognizerNotAvailable:
-            return "음성 인식을 사용할 수 없습니다."
+            return String(localized: "음성 인식을 사용할 수 없습니다.")
         case .notAuthorized:
-            return "음성 인식 권한이 없습니다."
+            return String(localized: "음성 인식 권한이 없습니다.")
         case .audioSessionError:
-            return "오디오 세션 설정에 실패했습니다."
+            return String(localized: "오디오 세션 설정에 실패했습니다.")
         }
     }
 }
