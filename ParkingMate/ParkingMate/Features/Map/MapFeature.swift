@@ -27,9 +27,11 @@ struct MapFeature {
 
     enum Action {
         case closeButtonTapped
+        case directionsButtonTapped
     }
 
     @Dependency(\.dismiss) var dismiss
+    @Dependency(\.mapsClient) var mapsClient
 
     var body: some ReducerOf<Self> {
         Reduce { state, action in
@@ -37,6 +39,12 @@ struct MapFeature {
             case .closeButtonTapped:
                 return .run { _ in
                     await dismiss()
+                }
+
+            case .directionsButtonTapped:
+                guard let coordinate = state.parkingInfo?.gpsCoords else { return .none }
+                return .run { _ in
+                    await mapsClient.openDirections(coordinate)
                 }
             }
         }

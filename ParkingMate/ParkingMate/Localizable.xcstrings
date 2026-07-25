@@ -63,6 +63,17 @@
         }
       }
     },
+    "길찾기" : {
+      "comment" : "지도 화면 하단 도보 길찾기 버튼",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Directions"
+          }
+        }
+      }
+    },
     "네비게이션 연동" : {
       "localizations" : {
         "en" : {

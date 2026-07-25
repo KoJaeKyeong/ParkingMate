@@ -44,8 +44,28 @@ struct MapView: View {
 
                 Spacer()
 
-                // 지도 컨트롤 (우측 하단)
-                HStack {
+                // 하단 컨트롤 (좌측: 길찾기, 우측: 지도 컨트롤)
+                HStack(alignment: .bottom) {
+                    if store.parkingCoordinate != nil {
+                        Button {
+                            store.send(.directionsButtonTapped)
+                        } label: {
+                            HStack(spacing: 8) {
+                                Image(systemName: "figure.walk")
+                                Text("길찾기")
+                                    .fontWeight(.semibold)
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 14)
+                            .background(Color.brandPrimary)
+                            .foregroundColor(.white)
+                            .clipShape(Capsule())
+                            .shadow(color: .black.opacity(0.2), radius: 8, y: 2)
+                        }
+                        .padding(.leading, 20)
+                        .padding(.bottom, 40)
+                    }
+
                     Spacer()
 
                     VStack(spacing: 12) {
