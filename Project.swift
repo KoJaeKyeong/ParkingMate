@@ -49,7 +49,10 @@ let project = Project(
             bundleId: "com.jaekyeongko.ParkingMate",
             deploymentTargets: .iOS("17.0"),
             infoPlist: .extendingDefault(with: appInfoPList),
-            buildableFolders: ["ParkingMate/ParkingMate"],
+            buildableFolders: [
+                "Projects/App/Sources",
+                "Projects/App/Resources"
+            ],
             dependencies: [
                 .external(name: "ComposableArchitecture")
             ],
@@ -69,7 +72,7 @@ let project = Project(
             bundleId: "com.jaekyeongko.ParkingMateTests",
             deploymentTargets: .iOS("17.0"),
             infoPlist: .default,
-            buildableFolders: ["ParkingMate/ParkingMateTests"],
+            buildableFolders: ["Projects/App/Tests"],
             dependencies: [
                 .target(name: "ParkingMate"),
                 .external(name: "ComposableArchitecture")
