@@ -1,6 +1,7 @@
 import SwiftUI
 
 import ComposableArchitecture
+import Core
 
 struct FormView: View {
     @Bindable var store: StoreOf<FormFeature>

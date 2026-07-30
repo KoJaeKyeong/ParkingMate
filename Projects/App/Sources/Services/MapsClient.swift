@@ -1,5 +1,7 @@
 import MapKit
+
 import ComposableArchitecture
+import Core
 
 struct MapsClient {
     var openDirections: @Sendable (GPSCoordinate) async -> Void

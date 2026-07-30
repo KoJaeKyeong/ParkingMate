@@ -9,6 +9,7 @@ import Foundation
 import MapKit
 
 import ComposableArchitecture
+import Core
 
 @Reducer
 struct MapFeature {
