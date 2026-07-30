@@ -8,5 +8,5 @@
 import Foundation
 
 extension URL {
-  static let parkingInfo = Self.documentsDirectory.appending(component: "parking-info.json")
+  public static let parkingInfo = Self.documentsDirectory.appending(component: "parking-info.json")
 }

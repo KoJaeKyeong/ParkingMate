@@ -43,6 +43,15 @@ let project = Project(
     ),
     targets: [
         .target(
+            name: "Core",
+            destinations: .iOS,
+            product: .staticFramework,
+            bundleId: "com.jaekyeongko.ParkingMate.Core",
+            deploymentTargets: .iOS("17.0"),
+            infoPlist: .default,
+            buildableFolders: ["Projects/Core/Sources"]
+        ),
+        .target(
             name: "ParkingMate",
             destinations: .iOS,
             product: .app,
@@ -54,6 +63,7 @@ let project = Project(
                 "Projects/App/Resources"
             ],
             dependencies: [
+                .target(name: "Core"),
                 .external(name: "ComposableArchitecture")
             ],
             settings: .settings(
@@ -75,6 +85,7 @@ let project = Project(
             buildableFolders: ["Projects/App/Tests"],
             dependencies: [
                 .target(name: "ParkingMate"),
+                .target(name: "Core"),
                 .external(name: "ComposableArchitecture")
             ]
         )
