@@ -3,13 +3,13 @@ import CoreLocation
 import ComposableArchitecture
 import Core
 
-struct LocationClient {
-    var requestAuthorization: @Sendable () async -> Void
-    var requestLocation: @Sendable () async throws -> GPSCoordinate
+public struct LocationClient {
+    public var requestAuthorization: @Sendable () async -> Void
+    public var requestLocation: @Sendable () async throws -> GPSCoordinate
 }
 
 extension LocationClient: DependencyKey {
-    static let liveValue = Self(
+    public static let liveValue = Self(
         requestAuthorization: {
             await MainActor.run {
                 LocationManager.shared.requestAuthorization()
@@ -20,7 +20,7 @@ extension LocationClient: DependencyKey {
         }
     )
 
-    static let testValue = Self(
+    public static let testValue = Self(
         requestAuthorization: { },
         requestLocation: {
             GPSCoordinate(latitude: 37.5665, longitude: 126.9780)
@@ -29,7 +29,7 @@ extension LocationClient: DependencyKey {
 }
 
 extension DependencyValues {
-    var locationClient: LocationClient {
+    public var locationClient: LocationClient {
         get { self[LocationClient.self] }
         set { self[LocationClient.self] = newValue }
     }

@@ -3,12 +3,12 @@ import MapKit
 import ComposableArchitecture
 import Core
 
-struct MapsClient {
-    var openDirections: @Sendable (GPSCoordinate) async -> Void
+public struct MapsClient {
+    public var openDirections: @Sendable (GPSCoordinate) async -> Void
 }
 
 extension MapsClient: DependencyKey {
-    static let liveValue = Self(
+    public static let liveValue = Self(
         openDirections: { coordinate in
             await MainActor.run {
                 let placemark = MKPlacemark(
@@ -27,13 +27,13 @@ extension MapsClient: DependencyKey {
         }
     )
 
-    static let testValue = Self(
+    public static let testValue = Self(
         openDirections: { _ in }
     )
 }
 
 extension DependencyValues {
-    var mapsClient: MapsClient {
+    public var mapsClient: MapsClient {
         get { self[MapsClient.self] }
         set { self[MapsClient.self] = newValue }
     }
