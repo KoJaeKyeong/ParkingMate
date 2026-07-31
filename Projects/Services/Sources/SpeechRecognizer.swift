@@ -184,16 +184,16 @@ actor SpeechRecognitionManager {
     }
 }
 
-struct SpeechRecognitionClient {
-    var requestAuthorization: @Sendable () async -> SFSpeechRecognizerAuthorizationStatus
-    var startRecognition: @Sendable () async throws -> AsyncThrowingStream<String, Error>
-    var stopRecognition: @Sendable () async -> Void
+public struct SpeechRecognitionClient {
+    public var requestAuthorization: @Sendable () async -> SFSpeechRecognizerAuthorizationStatus
+    public var startRecognition: @Sendable () async throws -> AsyncThrowingStream<String, Error>
+    public var stopRecognition: @Sendable () async -> Void
 }
 
 extension SpeechRecognitionClient: DependencyKey {
     private static let manager = SpeechRecognitionManager()
     
-    static let liveValue = Self(
+    public static let liveValue = Self(
         requestAuthorization: {
             await withCheckedContinuation { continuation in
                 Task { @MainActor in
@@ -211,7 +211,7 @@ extension SpeechRecognitionClient: DependencyKey {
         }
     )
     
-    static let testValue = Self(
+    public static let testValue = Self(
         requestAuthorization: { .authorized },
         startRecognition: { 
             AsyncThrowingStream { continuation in
@@ -241,7 +241,7 @@ enum SpeechRecognitionError: LocalizedError {
 }
 
 extension DependencyValues {
-    var speechRecognition: SpeechRecognitionClient {
+    public var speechRecognition: SpeechRecognitionClient {
         get { self[SpeechRecognitionClient.self] }
         set { self[SpeechRecognitionClient.self] = newValue }
     }
