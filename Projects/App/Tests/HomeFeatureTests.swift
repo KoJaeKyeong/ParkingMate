@@ -8,6 +8,7 @@
 import Foundation
 import Testing
 import ComposableArchitecture
+import Core
 
 @testable import ParkingMate
 
