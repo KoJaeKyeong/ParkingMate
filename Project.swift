@@ -38,7 +38,8 @@ let project = Project(
         base: [
             "SWIFT_VERSION": "5.0",
             "MARKETING_VERSION": "1.0.1",
-            "CURRENT_PROJECT_VERSION": "1"
+            "CURRENT_PROJECT_VERSION": "1",
+            "SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY": "YES"
         ].automaticCodeSigning(devTeam: "LPHNDVUAA8")
     ),
     targets: [
@@ -50,6 +51,23 @@ let project = Project(
             deploymentTargets: .iOS("17.0"),
             infoPlist: .default,
             buildableFolders: ["Projects/Core/Sources"]
+        ),
+        .target(
+            name: "DesignSystem",
+            destinations: .iOS,
+            product: .staticFramework,
+            bundleId: "com.jaekyeongko.ParkingMate.DesignSystem",
+            deploymentTargets: .iOS("17.0"),
+            infoPlist: .default,
+            buildableFolders: [
+                "Projects/DesignSystem/Sources",
+                "Projects/DesignSystem/Resources"
+            ],
+            settings: .settings(
+                base: [
+                    "ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS": "NO"
+                ]
+            )
         ),
         .target(
             name: "ParkingMate",
@@ -64,6 +82,7 @@ let project = Project(
             ],
             dependencies: [
                 .target(name: "Core"),
+                .target(name: "DesignSystem"),
                 .external(name: "ComposableArchitecture")
             ],
             settings: .settings(

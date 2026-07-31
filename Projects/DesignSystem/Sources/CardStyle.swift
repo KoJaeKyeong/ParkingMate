@@ -24,7 +24,7 @@ struct CardStyle: ViewModifier {
 }
 
 extension View {
-    func cardStyle(cornerRadius: CGFloat = 20) -> some View {
+    public func cardStyle(cornerRadius: CGFloat = 20) -> some View {
         modifier(CardStyle(cornerRadius: cornerRadius))
     }
 }

@@ -2,6 +2,7 @@ import SwiftUI
 import MapKit
 
 import ComposableArchitecture
+import DesignSystem
 
 struct MapView: View {
     @Bindable var store: StoreOf<MapFeature>

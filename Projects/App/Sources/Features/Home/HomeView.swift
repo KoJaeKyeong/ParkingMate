@@ -2,6 +2,7 @@ import SwiftUI
 
 import ComposableArchitecture
 import Core
+import DesignSystem
 
 struct HomeView: View {
     @Bindable var store: StoreOf<HomeFeature>
