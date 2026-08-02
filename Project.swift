@@ -17,12 +17,6 @@ let appInfoPList: [String: Plist.Value] = [
         "UIApplicationSupportsMultipleScenes": false
     ],
     "UISupportedInterfaceOrientations": ["UIInterfaceOrientationPortrait"],
-    "UISupportedInterfaceOrientations~ipad": [
-        "UIInterfaceOrientationPortrait",
-        "UIInterfaceOrientationPortraitUpsideDown",
-        "UIInterfaceOrientationLandscapeLeft",
-        "UIInterfaceOrientationLandscapeRight"
-    ],
     "NSLocationWhenInUseUsageDescription": "주차한 위치를 자동으로 저장하기 위해 위치 권한이 필요합니다.",
     "NSLocationAlwaysAndWhenInUseUsageDescription": "백그라운드에서도 주차 위치를 정확하게 기록하기 위해 항상 위치 권한이 필요합니다.",
     "NSCameraUsageDescription": "주차 위치를 사진으로 기록하기 위해 카메라 권한이 필요합니다.",
@@ -48,7 +42,7 @@ let project = Project(
     targets: [
         .target(
             name: "Core",
-            destinations: .iOS,
+            destinations: [.iPhone],
             product: .staticFramework,
             bundleId: "com.jaekyeongko.ParkingMate.Core",
             deploymentTargets: .iOS("17.0"),
@@ -57,7 +51,7 @@ let project = Project(
         ),
         .target(
             name: "DesignSystem",
-            destinations: .iOS,
+            destinations: [.iPhone],
             product: .staticFramework,
             bundleId: "com.jaekyeongko.ParkingMate.DesignSystem",
             deploymentTargets: .iOS("17.0"),
@@ -74,7 +68,7 @@ let project = Project(
         ),
         .target(
             name: "Services",
-            destinations: .iOS,
+            destinations: [.iPhone],
             product: .staticFramework,
             bundleId: "com.jaekyeongko.ParkingMate.Services",
             deploymentTargets: .iOS("17.0"),
@@ -87,7 +81,7 @@ let project = Project(
         ),
         .target(
             name: "FeatureMap",
-            destinations: .iOS,
+            destinations: [.iPhone],
             product: .staticFramework,
             bundleId: "com.jaekyeongko.ParkingMate.FeatureMap",
             deploymentTargets: .iOS("17.0"),
@@ -102,7 +96,7 @@ let project = Project(
         ),
         .target(
             name: "FeatureForm",
-            destinations: .iOS,
+            destinations: [.iPhone],
             product: .staticFramework,
             bundleId: "com.jaekyeongko.ParkingMate.FeatureForm",
             deploymentTargets: .iOS("17.0"),
@@ -117,7 +111,7 @@ let project = Project(
         ),
         .target(
             name: "AppFeature",
-            destinations: .iOS,
+            destinations: [.iPhone],
             product: .staticFramework,
             bundleId: "com.jaekyeongko.ParkingMate.AppFeature",
             deploymentTargets: .iOS("17.0"),
@@ -132,7 +126,7 @@ let project = Project(
         ),
         .target(
             name: "FeatureHome",
-            destinations: .iOS,
+            destinations: [.iPhone],
             product: .staticFramework,
             bundleId: "com.jaekyeongko.ParkingMate.FeatureHome",
             deploymentTargets: .iOS("17.0"),
@@ -147,7 +141,7 @@ let project = Project(
         ),
         .target(
             name: "ParkingMate",
-            destinations: .iOS,
+            destinations: [.iPhone],
             product: .app,
             bundleId: "com.jaekyeongko.ParkingMate",
             deploymentTargets: .iOS("17.0"),
@@ -171,7 +165,7 @@ let project = Project(
         ),
         .target(
             name: "FeatureHomeTests",
-            destinations: .iOS,
+            destinations: [.iPhone],
             product: .unitTests,
             bundleId: "com.jaekyeongko.ParkingMate.FeatureHomeTests",
             deploymentTargets: .iOS("17.0"),
@@ -186,7 +180,7 @@ let project = Project(
         ),
         .target(
             name: "FeatureFormTests",
-            destinations: .iOS,
+            destinations: [.iPhone],
             product: .unitTests,
             bundleId: "com.jaekyeongko.ParkingMate.FeatureFormTests",
             deploymentTargets: .iOS("17.0"),
@@ -200,7 +194,7 @@ let project = Project(
         ),
         .target(
             name: "FeatureMapTests",
-            destinations: .iOS,
+            destinations: [.iPhone],
             product: .unitTests,
             bundleId: "com.jaekyeongko.ParkingMate.FeatureMapTests",
             deploymentTargets: .iOS("17.0"),
@@ -213,7 +207,7 @@ let project = Project(
         ),
         .target(
             name: "AppFeatureTests",
-            destinations: .iOS,
+            destinations: [.iPhone],
             product: .unitTests,
             bundleId: "com.jaekyeongko.ParkingMate.AppFeatureTests",
             deploymentTargets: .iOS("17.0"),
