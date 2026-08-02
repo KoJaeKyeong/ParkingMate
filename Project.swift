@@ -72,7 +72,7 @@ let project = Project(
         .target(
             name: "Services",
             destinations: .iOS,
-            product: .staticLibrary,
+            product: .staticFramework,
             bundleId: "com.jaekyeongko.ParkingMate.Services",
             deploymentTargets: .iOS("17.0"),
             infoPlist: .default,
