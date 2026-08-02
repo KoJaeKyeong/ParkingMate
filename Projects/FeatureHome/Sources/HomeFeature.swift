@@ -12,14 +12,14 @@ import ComposableArchitecture
 import Services
 
 @Reducer
-struct HomeFeature {
+public struct HomeFeature {
     enum ParkingState {
         case idle
         case parking
     }
     
     @ObservableState
-    struct State: Equatable {
+    public struct State: Equatable {
         @Shared(.fileStorage(.parkingInfo)) var parkingInfo: ParkingInfo?
         
         var parkingState: ParkingState {
@@ -28,9 +28,11 @@ struct HomeFeature {
             }
         }
         var elapsedTime = ""
+        
+        public init() { }
     }
     
-    enum Action {
+    public enum Action {
         case onAppear
         case startParkingButtonTapped
         case finishParkingButtonTapped
@@ -43,7 +45,7 @@ struct HomeFeature {
         case delegate(Delegate)
         
         @CasePathable
-        enum Delegate: Equatable {
+        public enum Delegate: Equatable {
             case parkingStarted
             case editInfoRequested
             case mapRequested
@@ -57,7 +59,9 @@ struct HomeFeature {
         case timer
     }
     
-    var body: some ReducerOf<Self> {        
+    public init() { }
+        
+    public var body: some ReducerOf<Self> {        
         Reduce { state, action in
             switch action {
             case .onAppear:

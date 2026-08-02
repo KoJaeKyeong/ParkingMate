@@ -4,15 +4,19 @@ import MapKit
 import ComposableArchitecture
 import DesignSystem
 
-struct MapView: View {
+public struct MapView: View {
     @Bindable var store: StoreOf<MapFeature>
 
     @Namespace private var mapScope
     @State private var position: MapCameraPosition = .automatic
     @State private var isFollowingHeading = false
     private let headingManager = CLLocationManager()
+    
+    public init(store: StoreOf<MapFeature>) {
+        self.store = store
+    }
 
-    var body: some View {
+    public var body: some View {
         ZStack {
             // 전체 화면 지도
             mapSection

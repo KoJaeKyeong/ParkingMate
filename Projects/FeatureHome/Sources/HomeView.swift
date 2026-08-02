@@ -4,10 +4,14 @@ import ComposableArchitecture
 import Core
 import DesignSystem
 
-struct HomeView: View {
+public struct HomeView: View {
     @Bindable var store: StoreOf<HomeFeature>
+    
+    public init(store: StoreOf<HomeFeature>) {
+        self.store = store
+    }
 
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             ZStack {
                 LinearGradient(
