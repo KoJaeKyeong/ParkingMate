@@ -9,6 +9,8 @@ import ProjectDescription
 
 let appInfoPList: [String: Plist.Value] = [
     "CFBundleDisplayName": "주차도우미",
+    "CFBundleShortVersionString": "$(MARKETING_VERSION)",
+    "CFBundleVersion": "$(CURRENT_PROJECT_VERSION)",
     "UILaunchScreen": [:],
     "UIApplicationSceneManifest": [
         "UIApplicationSupportsMultipleScenes": false
@@ -37,8 +39,8 @@ let project = Project(
     settings: .settings(
         base: [
             "SWIFT_VERSION": "5.0",
-            "MARKETING_VERSION": "1.0.1",
-            "CURRENT_PROJECT_VERSION": "1",
+            "MARKETING_VERSION": "1.0.2",
+            "CURRENT_PROJECT_VERSION": "2",
             "SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY": "YES"
         ].automaticCodeSigning(devTeam: "LPHNDVUAA8")
     ),
