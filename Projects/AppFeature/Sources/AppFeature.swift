@@ -13,25 +13,29 @@ import FeatureMap
 import ComposableArchitecture
 
 @Reducer
-struct AppFeature {
+public struct AppFeature {
     @ObservableState
-    struct State: Equatable {
+    public struct State: Equatable {
         var home = HomeFeature.State()
         @Presents var destination: Destination.State?
+        
+        public init() { }
     }
     
-    enum Action {
+    public enum Action {
         case home(HomeFeature.Action)
         case destination(PresentationAction<Destination.Action>)
     }
     
     @Reducer
-    enum Destination {
+    public enum Destination {
         case form(FormFeature)
         case map(MapFeature)
     }
     
-    var body: some ReducerOf<Self> {
+    public init() { }
+    
+    public var body: some ReducerOf<Self> {
         Scope(state: \.home, action: \.home) {
             HomeFeature()
         }

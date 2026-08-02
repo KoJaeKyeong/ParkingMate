@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+import AppFeature
 import ComposableArchitecture
 
 @main

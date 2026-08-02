@@ -113,6 +113,21 @@ let project = Project(
             ]
         ),
         .target(
+            name: "AppFeature",
+            destinations: .iOS,
+            product: .staticFramework,
+            bundleId: "com.jaekyeongko.ParkingMate.AppFeature",
+            deploymentTargets: .iOS("17.0"),
+            infoPlist: .default,
+            buildableFolders: ["Projects/AppFeature/Sources"],
+            dependencies: [
+                .target(name: "FeatureHome"),
+                .target(name: "FeatureForm"),
+                .target(name: "FeatureMap"),
+                .external(name: "ComposableArchitecture")
+            ]
+        ),
+        .target(
             name: "FeatureHome",
             destinations: .iOS,
             product: .staticFramework,
@@ -139,12 +154,7 @@ let project = Project(
                 "Projects/App/Resources"
             ],
             dependencies: [
-                .target(name: "Core"),
-                .target(name: "DesignSystem"),
-                .target(name: "Services"),
-                .target(name: "FeatureHome"),
-                .target(name: "FeatureForm"),
-                .target(name: "FeatureMap"),
+                .target(name: "AppFeature"),
                 .external(name: "ComposableArchitecture")
             ],
             settings: .settings(
@@ -171,6 +181,7 @@ let project = Project(
                 .target(name: "FeatureHome"),
                 .target(name: "FeatureForm"),
                 .target(name: "FeatureMap"),
+                .target(name: "AppFeature"),
                 .external(name: "ComposableArchitecture")
             ]
         )

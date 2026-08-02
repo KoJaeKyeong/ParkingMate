@@ -12,10 +12,14 @@ import FeatureHome
 import FeatureMap
 import ComposableArchitecture
 
-struct AppView: View {
+public struct AppView: View {
     @Bindable var store: StoreOf<AppFeature>
     
-    var body: some View {
+    public init(store: StoreOf<AppFeature>) {
+        self.store = store
+    }
+    
+    public var body: some View {
         HomeView(store: store.scope(state: \.home, action: \.home))
             .sheet(
                 item: $store.scope(state: \.destination?.form, action: \.destination.form)

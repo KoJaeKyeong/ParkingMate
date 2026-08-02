@@ -13,7 +13,7 @@ import FeatureForm
 import FeatureHome
 import FeatureMap
 
-@testable import ParkingMate
+@testable import AppFeature
 
 @MainActor
 struct AppFeatureTests {
