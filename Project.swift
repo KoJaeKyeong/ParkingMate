@@ -9,6 +9,7 @@ import ProjectDescription
 
 let appInfoPList: [String: Plist.Value] = [
     "CFBundleDisplayName": "주차도우미",
+    "ITSAppUsesNonExemptEncryption": false,
     "CFBundleShortVersionString": "$(MARKETING_VERSION)",
     "CFBundleVersion": "$(CURRENT_PROJECT_VERSION)",
     "UILaunchScreen": [:],
