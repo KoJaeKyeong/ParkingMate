@@ -167,23 +167,76 @@ let project = Project(
             )
         ),
         .target(
-            name: "ParkingMateTests",
+            name: "FeatureHomeTests",
             destinations: .iOS,
             product: .unitTests,
-            bundleId: "com.jaekyeongko.ParkingMateTests",
+            bundleId: "com.jaekyeongko.ParkingMate.FeatureHomeTests",
             deploymentTargets: .iOS("17.0"),
             infoPlist: .default,
-            buildableFolders: ["Projects/App/Tests"],
+            buildableFolders: ["Projects/FeatureHome/Tests"],
             dependencies: [
-                .target(name: "ParkingMate"),
+                .target(name: "FeatureHome"),
                 .target(name: "Core"),
                 .target(name: "Services"),
+                .external(name: "ComposableArchitecture")
+            ]
+        ),
+        .target(
+            name: "FeatureFormTests",
+            destinations: .iOS,
+            product: .unitTests,
+            bundleId: "com.jaekyeongko.ParkingMate.FeatureHomeTests",
+            deploymentTargets: .iOS("17.0"),
+            infoPlist: .default,
+            buildableFolders: ["Projects/FeatureForm/Tests"],
+            dependencies: [
+                .target(name: "FeatureForm"),
+                .target(name: "Services"),
+                .external(name: "ComposableArchitecture")
+            ]
+        ),
+        .target(
+            name: "FeatureMapTests",
+            destinations: .iOS,
+            product: .unitTests,
+            bundleId: "com.jaekyeongko.ParkingMate.FeatureHomeTests",
+            deploymentTargets: .iOS("17.0"),
+            infoPlist: .default,
+            buildableFolders: ["Projects/FeatureMap/Tests"],
+            dependencies: [
+                .target(name: "FeatureMap"),
+                .external(name: "ComposableArchitecture")
+            ]
+        ),
+        .target(
+            name: "AppFeatureTests",
+            destinations: .iOS,
+            product: .unitTests,
+            bundleId: "com.jaekyeongko.ParkingMate.FeatureHomeTests",
+            deploymentTargets: .iOS("17.0"),
+            infoPlist: .default,
+            buildableFolders: ["Projects/AppFeature/Tests"],
+            dependencies: [
+                .target(name: "AppFeature"),
                 .target(name: "FeatureHome"),
                 .target(name: "FeatureForm"),
                 .target(name: "FeatureMap"),
-                .target(name: "AppFeature"),
                 .external(name: "ComposableArchitecture")
             ]
+        )
+    ],
+    schemes: [
+        .scheme(
+            name: "ParkingMate",
+            shared: true,
+            buildAction: .buildAction(targets: ["ParkingMate"]),
+            testAction: .targets([
+                "FeatureHomeTests",
+                "FeatureFormTests",
+                "FeatureMapTests",
+                "AppFeatureTests"
+            ]),
+            runAction: .runAction(executable: .target("ParkingMate"))
         )
     ]
 )
