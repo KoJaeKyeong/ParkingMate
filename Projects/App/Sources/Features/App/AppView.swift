@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+import FeatureForm
+import FeatureHome
+import FeatureMap
 import ComposableArchitecture
 
 struct AppView: View {

@@ -5,14 +5,14 @@
 //  Created by 고재경 on 5/7/26.
 //
 
-import Foundation
-import Testing
 import UIKit
 import Speech
+import Testing
+
 import ComposableArchitecture
 import Services
 
-@testable import ParkingMate
+@testable import FeatureForm
 
 @MainActor
 struct FormFeatureTests {

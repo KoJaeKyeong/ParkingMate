@@ -7,11 +7,12 @@
 
 import Foundation
 import Testing
+
 import ComposableArchitecture
 import Core
 import Services
 
-@testable import ParkingMate
+@testable import FeatureHome
 
 @MainActor
 struct HomeFeatureTests {

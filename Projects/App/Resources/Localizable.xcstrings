@@ -2,6 +2,7 @@
   "sourceLanguage" : "ko",
   "strings" : {
     "(선택사항)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -13,6 +14,7 @@
     },
     "%lld시간 %lld분" : {
       "comment" : "주차 경과 시간 (시간/분)",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -23,6 +25,7 @@
       }
     },
     "GPS 위치 자동 저장" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -33,6 +36,7 @@
       }
     },
     "GPS 위치 정보가 없습니다" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -44,6 +48,7 @@
     },
     "ParkingMate" : {
       "comment" : "앱 이름 (브랜드)",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -54,6 +59,7 @@
       }
     },
     "경과 시간" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -65,6 +71,7 @@
     },
     "길찾기" : {
       "comment" : "지도 화면 하단 도보 길찾기 버튼",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -75,6 +82,7 @@
       }
     },
     "네비게이션 연동" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -85,6 +93,7 @@
       }
     },
     "듣는 중..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -95,6 +104,7 @@
       }
     },
     "말씀이 끝나면 자동으로 인식됩니다" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -105,6 +115,7 @@
       }
     },
     "버튼을 눌러 현재 위치를 저장합니다" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -115,6 +126,7 @@
       }
     },
     "사진 및 메모 추가" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -126,6 +138,7 @@
     },
     "사진 촬영" : {
       "comment" : "사진 촬영 섹션 제목",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -137,6 +150,7 @@
     },
     "사진 촬영 (%lld/3)" : {
       "comment" : "사진 촬영 버튼 (현재 장수/최대 3장)",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -148,6 +162,7 @@
     },
     "예: 지하 3층 B4, 2층 A구역 12번" : {
       "comment" : "위치 메모 입력 힌트",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -169,6 +184,7 @@
       }
     },
     "외부 지도앱으로 쉽게 길찾기" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -190,6 +206,7 @@
       }
     },
     "위치 메모" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -200,6 +217,7 @@
       }
     },
     "위치 메모나 사진을 추가하면 나중에 더 쉽게 찾을 수 있어요!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -210,6 +228,7 @@
       }
     },
     "위치 정보" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -220,6 +239,7 @@
       }
     },
     "위치 확인" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -263,6 +283,7 @@
       }
     },
     "음성 입력" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -273,6 +294,7 @@
       }
     },
     "저장된 사진" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -283,6 +305,7 @@
       }
     },
     "저장하기" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -293,6 +316,7 @@
       }
     },
     "정보 수정" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -303,6 +327,7 @@
       }
     },
     "정보 추가하기" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -313,6 +338,7 @@
       }
     },
     "정확한 주차 위치를 기록합니다" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -323,6 +349,7 @@
       }
     },
     "주변 환경을 기록해 더 쉽게 찾으세요" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -333,6 +360,7 @@
       }
     },
     "주요 기능" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -343,6 +371,7 @@
       }
     },
     "주차 시작" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -353,6 +382,7 @@
       }
     },
     "주차 시작 시 위치를 저장해주세요" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -364,6 +394,7 @@
     },
     "주차 위치" : {
       "comment" : "지도 마커 제목",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -374,6 +405,7 @@
       }
     },
     "주차 위치나 주변 특징을 촬영하면 나중에 찾기 쉬워집니다." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -384,6 +416,7 @@
       }
     },
     "주차 위치를 쉽게 기억하세요" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -395,6 +428,7 @@
     },
     "주차 정보 입력" : {
       "comment" : "주차 정보 입력 화면 제목",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -406,6 +440,7 @@
     },
     "주차 중" : {
       "comment" : "주차 진행 중 상태 배지",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -416,6 +451,7 @@
       }
     },
     "주차를 시작하세요" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -426,6 +462,7 @@
       }
     },
     "추가 정보를 입력해보세요" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -436,6 +473,7 @@
       }
     },
     "출차 완료" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -446,6 +484,7 @@
       }
     },
     "취소" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

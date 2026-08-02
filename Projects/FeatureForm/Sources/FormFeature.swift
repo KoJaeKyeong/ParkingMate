@@ -13,9 +13,9 @@ import Core
 import Services
 
 @Reducer
-struct FormFeature {        
+public struct FormFeature {
     @ObservableState
-    struct State: Equatable {
+    public struct State: Equatable {
         @Shared(.fileStorage(.parkingInfo)) var parkingInfo: ParkingInfo?
 
         var locationInput: String = ""
@@ -26,7 +26,7 @@ struct FormFeature {
         var capturedImage: UIImage?
         var speechErrorMessage: String?
 
-        init() {
+        public init() {
             // 기존 정보가 있으면 로드
             self.locationInput = parkingInfo?.location ?? ""
             self.photoImages = parkingInfo?.photos.compactMap { photoItem in
@@ -35,7 +35,7 @@ struct FormFeature {
         }
     }
     
-    enum Action: BindableAction {
+    public enum Action: BindableAction {
         case binding(BindingAction<State>)  // binding action 추가
 
         case cancelButtonTapped
@@ -54,7 +54,9 @@ struct FormFeature {
     @Dependency(\.dismiss) var dismiss
     @Dependency(\.speechRecognition) var speechRecognition
     
-    var body: some ReducerOf<Self> {
+    public init() { }
+    
+    public var body: some ReducerOf<Self> {
         BindingReducer()
         Reduce { state, action in
             switch action {

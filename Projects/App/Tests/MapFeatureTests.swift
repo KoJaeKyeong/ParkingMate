@@ -7,9 +7,10 @@
 
 import Foundation
 import Testing
+
 import ComposableArchitecture
 
-@testable import ParkingMate
+@testable import FeatureMap
 
 @MainActor
 struct MapFeatureTests {

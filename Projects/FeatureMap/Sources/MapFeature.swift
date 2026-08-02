@@ -13,9 +13,9 @@ import Core
 import Services
 
 @Reducer
-struct MapFeature {
+public struct MapFeature {
     @ObservableState
-    struct State: Equatable {
+    public struct State: Equatable {
         @Shared(.fileStorage(.parkingInfo)) var parkingInfo: ParkingInfo?
 
         var parkingCoordinate: CLLocationCoordinate2D? {
@@ -25,17 +25,21 @@ struct MapFeature {
                 longitude: coords.longitude
             )
         }
+        
+        public init() { }
     }
 
-    enum Action {
+    public enum Action {
         case closeButtonTapped
         case directionsButtonTapped
     }
 
     @Dependency(\.dismiss) var dismiss
     @Dependency(\.mapsClient) var mapsClient
+    
+    public init() { }
 
-    var body: some ReducerOf<Self> {
+    public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
             case .closeButtonTapped:

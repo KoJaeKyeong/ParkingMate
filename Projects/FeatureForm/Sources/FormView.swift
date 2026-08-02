@@ -4,10 +4,14 @@ import ComposableArchitecture
 import Core
 import DesignSystem
 
-struct FormView: View {
+public struct FormView: View {
     @Bindable var store: StoreOf<FormFeature>
+    
+    public init(store: StoreOf<FormFeature>) {
+        self.store = store
+    }
 
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             ZStack {
                 LinearGradient(

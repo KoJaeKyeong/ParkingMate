@@ -83,6 +83,51 @@ let project = Project(
             ]
         ),
         .target(
+            name: "FeatureMap",
+            destinations: .iOS,
+            product: .staticFramework,
+            bundleId: "com.jaekyeongko.ParkingMate.FeatureMap",
+            deploymentTargets: .iOS("17.0"),
+            infoPlist: .default,
+            buildableFolders: ["Projects/FeatureMap/Sources"],
+            dependencies: [
+                .target(name: "Core"),
+                .target(name: "DesignSystem"),
+                .target(name: "Services"),
+                .external(name: "ComposableArchitecture")
+            ]
+        ),
+        .target(
+            name: "FeatureForm",
+            destinations: .iOS,
+            product: .staticFramework,
+            bundleId: "com.jaekyeongko.ParkingMate.FeatureForm",
+            deploymentTargets: .iOS("17.0"),
+            infoPlist: .default,
+            buildableFolders: ["Projects/FeatureForm/Sources"],
+            dependencies: [
+                .target(name: "Core"),
+                .target(name: "DesignSystem"),
+                .target(name: "Services"),
+                .external(name: "ComposableArchitecture")
+            ]
+        ),
+        .target(
+            name: "FeatureHome",
+            destinations: .iOS,
+            product: .staticFramework,
+            bundleId: "com.jaekyeongko.ParkingMate.FeatureHome",
+            deploymentTargets: .iOS("17.0"),
+            infoPlist: .default,
+            buildableFolders: ["Projects/FeatureHome/Sources"],
+            dependencies: [
+                .target(name: "Core"),
+                .target(name: "DesignSystem"),
+                .target(name: "Services"),
+                .external(name: "ComposableArchitecture")
+            ]
+        ),
+        .target(
             name: "ParkingMate",
             destinations: .iOS,
             product: .app,
@@ -97,6 +142,9 @@ let project = Project(
                 .target(name: "Core"),
                 .target(name: "DesignSystem"),
                 .target(name: "Services"),
+                .target(name: "FeatureHome"),
+                .target(name: "FeatureForm"),
+                .target(name: "FeatureMap"),
                 .external(name: "ComposableArchitecture")
             ],
             settings: .settings(
@@ -120,6 +168,9 @@ let project = Project(
                 .target(name: "ParkingMate"),
                 .target(name: "Core"),
                 .target(name: "Services"),
+                .target(name: "FeatureHome"),
+                .target(name: "FeatureForm"),
+                .target(name: "FeatureMap"),
                 .external(name: "ComposableArchitecture")
             ]
         )
