@@ -64,3 +64,13 @@ fastlane/test_output
 plan.pdf
 parking_app_ui.tsx
 .DS_Store
+CLAUDE.md
+
+# Tuist
+# 매니페스트(Tuist.swift, Project.swift, Tuist/Package.swift)와 의존성 잠금 파일
+# (Tuist/Package.resolved)만 추적하고, 생성물은 전부 무시한다.
+Derived/
+Tuist/.build/
+Tuist/.swiftpm/
+*.xcodeproj
+*.xcworkspace
