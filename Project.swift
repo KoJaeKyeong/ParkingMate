@@ -34,8 +34,8 @@ let project = Project(
     settings: .settings(
         base: [
             "SWIFT_VERSION": "5.0",
-            "MARKETING_VERSION": "1.0.2",
-            "CURRENT_PROJECT_VERSION": "4",
+            "MARKETING_VERSION": "1.0.3",
+            "CURRENT_PROJECT_VERSION": "5",
             "SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY": "YES"
         ].automaticCodeSigning(devTeam: "LPHNDVUAA8")
     ),
